@@ -89,7 +89,7 @@ pub struct Starship {
 
 impl Summary for Starship {
   fn summarize(&self) -> String {
-    format!("Starship {} was maunfactured by {} costing {} with a maximum speed of {} and a cargo capacity of {}.\
+    format!("Starship {} was maunfactured by {} costing {} with a maximum speed of {} and a cargo capacity of {}. \
      It can hold {} crew members and can transport up to {} passengers",
      self.name,
      self.manufacturer,
@@ -114,5 +114,6 @@ pub struct StarWarsItem {
   pub count: u32,
   pub next: Option<String>,
   pub previous: Option<String>,
-  pub results: Vec<String>
+  pub results: Vec<String>,
+  pub item_type: String
 }

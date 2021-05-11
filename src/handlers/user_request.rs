@@ -36,7 +36,8 @@ pub fn resource_summaries(input: String, url: Option<String>) -> StarWarsItem {
         count: starships.count,
         next: starships.next,
         previous: starships.previous,
-        results: starships.results.iter().map(|starship| starship.summarize()).collect::<Vec<_>>()
+        results: starships.results.iter().map(|starship| starship.summarize()).collect::<Vec<_>>(),
+        item_type: String::from("Starships")
       }
     },
     "F" => {
@@ -46,7 +47,8 @@ pub fn resource_summaries(input: String, url: Option<String>) -> StarWarsItem {
         count: films.count,
         next: films.next,
         previous: films.previous,
-        results: films.results.iter().map(|film| film.summarize()).collect::<Vec<_>>()
+        results: films.results.iter().map(|film| film.summarize()).collect::<Vec<_>>(),
+        item_type: String::from("Films")
       }
     },
     "P" => {
@@ -56,7 +58,8 @@ pub fn resource_summaries(input: String, url: Option<String>) -> StarWarsItem {
         count: people.count,
         next: people.next,
         previous: people.previous,
-        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>(),
+        item_type: String::from("People")
       }
     },
     _ => {
@@ -66,7 +69,8 @@ pub fn resource_summaries(input: String, url: Option<String>) -> StarWarsItem {
         count: people.count,
         next: people.next,
         previous: people.previous,
-        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>(),
+        item_type: String::from("People")
       }
     }
   }

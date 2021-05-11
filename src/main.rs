@@ -21,7 +21,7 @@ fn main() {
 
     println!("{}", style("Welcome Star Wars!").cyan());
 
-    let response = display_dialog(&selections);
+    let response = display_dialog(&selections, "Please select one of these options to get started");
     let input = String::from(hash.get(&response).unwrap());
 
     // setup loader
@@ -31,5 +31,17 @@ fn main() {
 
     let data: StarWarsItem = resource_summaries(input, None);
 
-    finish_loader_and_display_result(&mut loading, data);
+    finish_loader_and_display_result(&mut loading, &data);
+
+    if data.next.is_some() {
+        let next = display_dialog(&["Yes", "No", "Suprise Me"], "Please select one of these options to load more");
+
+        if next == "Yes" || next == "Suprise Me" {
+            let data: StarWarsItem = resource_summaries(String::from(hash.get(&data.item_type).unwrap()), data.next);
+
+            finish_loader_and_display_result(&mut loading, &data);
+        }
+    }
+
+    loading.end();
 }

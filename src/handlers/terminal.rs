@@ -5,9 +5,9 @@ use std::time::Duration;
 
 use crate::api::models::*;
 
-pub fn display_dialog(selections: &[&'static str; 3]) -> String {
+pub fn display_dialog(selections: &[&'static str; 3], prompt: &str) -> String {
   let selection = Select::with_theme(&ColorfulTheme::default())
-        .with_prompt("Please select one of these options to get started")
+        .with_prompt(prompt)
         .default(0)
         .items(&selections[..])
         .interact()
@@ -29,14 +29,13 @@ pub fn setup_loader(loading: &mut Loading) {
   }
 }
 
-pub fn finish_loader_and_display_result(loading: &mut Loading, data: StarWarsItem) {
+pub fn finish_loader_and_display_result(loading: &mut Loading, data: &StarWarsItem) {
   loading.success("OK");
 
   println!();
   println!("{}", "-".repeat(120));
-  loading.end();
 
-  for item in data.results {
+  for item in &data.results {
       println!("{}", item);
   }
 
