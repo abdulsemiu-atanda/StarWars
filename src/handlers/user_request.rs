@@ -1,36 +1,36 @@
 use crate::api::api_tools::*;
 use crate::api::models::*;
 
-pub fn people() -> ApiResponse<Person> {
-  let endpoint = api_url("people");
+pub fn people(url: Option<String>) -> ApiResponse<Person> {
+  let endpoint = url.unwrap_or(api_url("people"));
   let response = api_response(&endpoint);
   let data: ApiResponse<Person> = response.json().unwrap();
 
   data
 }
 
-pub fn starships() -> ApiResponse<Starship> {
-  let endpoint = api_url("starships");
+pub fn starships(url: Option<String>) -> ApiResponse<Starship> {
+  let endpoint = url.unwrap_or(api_url("starships"));
   let response = api_response(&endpoint);
   let data: ApiResponse<Starship> = response.json().unwrap();
 
   data
 }
 
-pub fn films() -> ApiResponse<Film> {
-  let endpoint = api_url("films");
+pub fn films(url: Option<String>) -> ApiResponse<Film> {
+  let endpoint = url.unwrap_or(api_url("films"));
   let response = api_response(&endpoint);
   let data: ApiResponse<Film> = response.json().unwrap();
 
   data
 }
 
-pub fn resource_summaries(input: &String) -> StarWarsItem {
+pub fn resource_summaries(input: String, url: Option<String>) -> StarWarsItem {
   let trimmed_input = input.trim();
 
   match trimmed_input {
     "S" => {
-      let starships = starships();
+      let starships = starships(url);
 
       StarWarsItem {
         count: starships.count,
@@ -40,7 +40,7 @@ pub fn resource_summaries(input: &String) -> StarWarsItem {
       }
     },
     "F" => {
-      let films = films();
+      let films = films(url);
 
       StarWarsItem {
         count: films.count,
@@ -50,7 +50,7 @@ pub fn resource_summaries(input: &String) -> StarWarsItem {
       }
     },
     "P" => {
-      let people = people();
+      let people = people(url);
 
       StarWarsItem {
         count: people.count,
@@ -60,7 +60,7 @@ pub fn resource_summaries(input: &String) -> StarWarsItem {
       }
     },
     _ => {
-      let people = people();
+      let people = people(url);
 
       StarWarsItem {
         count: people.count,
