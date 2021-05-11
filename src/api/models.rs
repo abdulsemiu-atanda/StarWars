@@ -109,3 +109,10 @@ pub struct ApiResponse<T: Summary> {
   pub previous: Option<String>,
   pub results: Vec<T>
 }
+
+pub struct StarWarsItem {
+  pub count: u32,
+  pub next: Option<String>,
+  pub previous: Option<String>,
+  pub results: Vec<String>
+}

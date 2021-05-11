@@ -25,29 +25,49 @@ pub fn films() -> ApiResponse<Film> {
   data
 }
 
-pub fn resource_summaries(input: &String) -> Vec<String> {
+pub fn resource_summaries(input: &String) -> StarWarsItem {
   let trimmed_input = input.trim();
 
   match trimmed_input {
     "S" => {
       let starships = starships();
 
-      starships.results.iter().map(|starship| starship.summarize()).collect::<Vec<_>>()
+      StarWarsItem {
+        count: starships.count,
+        next: starships.next,
+        previous: starships.previous,
+        results: starships.results.iter().map(|starship| starship.summarize()).collect::<Vec<_>>()
+      }
     },
     "F" => {
       let films = films();
 
-      films.results.iter().map(|film| film.summarize()).collect::<Vec<_>>()
+      StarWarsItem {
+        count: films.count,
+        next: films.next,
+        previous: films.previous,
+        results: films.results.iter().map(|film| film.summarize()).collect::<Vec<_>>()
+      }
     },
     "P" => {
       let people = people();
 
-      people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+      StarWarsItem {
+        count: people.count,
+        next: people.next,
+        previous: people.previous,
+        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+      }
     },
     _ => {
       let people = people();
 
-      people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+      StarWarsItem {
+        count: people.count,
+        next: people.next,
+        previous: people.previous,
+        results: people.results.iter().map(|person| person.summarize()).collect::<Vec<_>>()
+      }
     }
   }
 }

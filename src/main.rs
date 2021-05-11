@@ -9,6 +9,7 @@ mod api;
 mod handlers;
 
 use handlers::user_request::*;
+use api::models::*;
 
 fn main() {
     let mut hash = HashMap::new();
@@ -44,14 +45,14 @@ fn main() {
         thread::sleep(Duration::from_millis(50));
     }
 
-    let data = resource_summaries(&input);
+    let data: StarWarsItem = resource_summaries(&input);
 
     loading.success("OK");
     println!();
     println!("{}", "-".repeat(120));
     loading.end();
 
-    for item in &data {
+    for item in &data.results {
         println!("{}", item);
     }
     println!("{}", "-".repeat(120));
