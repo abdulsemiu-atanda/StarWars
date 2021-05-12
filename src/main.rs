@@ -5,9 +5,7 @@ use std::collections::HashMap;
 mod api;
 mod handlers;
 
-use handlers::user_request::*;
 use handlers::terminal::*;
-use api::models::*;
 
 fn main() {
     let mut hash = HashMap::new();
@@ -29,19 +27,7 @@ fn main() {
 
     setup_loader(&mut loading);
 
-    let data: StarWarsItem = resource_summaries(input, None);
-
-    finish_loader_and_display_result(&mut loading, &data);
-
-    if data.next.is_some() {
-        let next = display_dialog(&["Yes", "No", "Suprise Me"], "Please select one of these options to load more");
-
-        if next == "Yes" || next == "Suprise Me" {
-            let data: StarWarsItem = resource_summaries(String::from(hash.get(&data.item_type).unwrap()), data.next);
-
-            finish_loader_and_display_result(&mut loading, &data);
-        }
-    }
+    user_action(input, None, &mut loading, hash);
 
     loading.end();
 }
