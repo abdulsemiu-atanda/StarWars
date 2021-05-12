@@ -791,6 +791,7 @@ dependencies = [
  "console",
  "dialoguer",
  "loading",
+ "rand",
  "reqwest",
  "serde",
  "serde_derive",
